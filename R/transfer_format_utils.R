@@ -128,7 +128,7 @@ storage_write_csv <- function(object, container, file, ...)
     func <- if(requireNamespace("readr"))
         storage_write_csv_readr
     else storage_write_csv_base
-    func(object, container, file, delim=delim, ...)
+    func(object, container, file, ...)
 }
 
 

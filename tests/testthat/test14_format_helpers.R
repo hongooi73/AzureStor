@@ -59,6 +59,12 @@ test_that("read/write RData works",
 
 test_that("read/write delim works",
 {
+    fname0 <- paste0(make_name(), ".tsv")
+    expect_silent(storage_write_delim(iris, cont, fname0))
+    irisnew0 <- storage_read_delim(cont, fname0)
+    irisnew0$Species <- as.factor(irisnew0$Species)
+    expect_true(dfs_identical(iris, irisnew0))
+
     # readr
     fname1 <- paste0(make_name(), ".tsv")
     expect_silent(storage_write_delim_readr(iris, cont, fname1))
@@ -76,6 +82,13 @@ test_that("read/write delim works",
 test_that("read/write CSV works",
 {
     # readr
+    fname0 <- paste0(make_name(), ".csv")
+    expect_silent(storage_write_csv(iris, cont, fname0))
+    irisnew0 <- storage_read_csv(cont, fname0)
+    irisnew0$Species <- as.factor(irisnew0$Species)
+    expect_true(dfs_identical(iris, irisnew0))
+
+    # readr
     fname1 <- paste0(make_name(), ".csv")
     expect_silent(storage_write_csv_readr(iris, cont, fname1))
     irisnew1 <- storage_read_csv_readr(cont, fname1, col_types="nnnnf")
@@ -91,6 +104,13 @@ test_that("read/write CSV works",
 
 test_that("read/write CSV2 works",
 {
+    # readr
+    fname0 <- paste0(make_name(), ".csv2")
+    expect_silent(storage_write_csv2(iris, cont, fname0))
+    irisnew0 <- storage_read_csv2(cont, fname0)
+    irisnew0$Species <- as.factor(irisnew0$Species)
+    expect_true(dfs_identical(iris, irisnew0))
+
     # readr
     fname1 <- paste0(make_name(), ".csv2")
     expect_silent(storage_write_csv2_readr(iris, cont, fname1))
